@@ -1,0 +1,109 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+Apache Rave :: rave-shindig
+
+
+From: 'an unknown organization'
+  - AOP alliance (http://aopalliance.sourceforge.net) aopalliance:aopalliance:jar:1.0
+    License: Public Domain 
+  - H2 Database Engine (http://www.h2database.com) com.h2database:h2:jar:1.3.154
+    License: The H2 License, Version 1.0  (http://h2database.com/html/license.html)
+  - ICU4J (http://icu-project.org/) com.ibm.icu:icu4j:jar:4.8.1.1
+    License: ICU License  (http://source.icu-project.org/repos/icu/icu/trunk/license.html)
+  - javax.inject (http://code.google.com/p/atinject/) javax.inject:javax.inject:jar:1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Serp (http://serp.sourceforge.net) net.sourceforge.serp:serp:jar:1.13.1
+    License: BSD  (LICENSE.txt)
+  - ReCaptcha Java Library (http://tanesha.net/projects/recaptcha4j/) net.tanesha.recaptcha4j:recaptcha4j:jar:0.0.7
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - AspectJ runtime (http://www.aspectj.org) org.aspectj:aspectjrt:jar:1.6.9
+    License: Eclipse Public License - v 1.0  (http://www.eclipse.org/legal/epl-v10.html)
+  - AspectJ weaver (http://www.aspectj.org) org.aspectj:aspectjweaver:jar:1.6.9
+    License: Eclipse Public License - v 1.0  (http://www.eclipse.org/legal/epl-v10.html)
+  - FreeMarker (http://freemarker.org) org.freemarker:freemarker:jar:2.3.18
+    License: BSD-style license  (http://freemarker.org/LICENSE.txt)
+  - spring-aop  org.springframework:spring-aop:jar:3.1.0.RELEASE
+
+  - spring-asm  org.springframework:spring-asm:jar:3.1.0.RELEASE
+
+  - spring-beans  org.springframework:spring-beans:jar:3.1.0.RELEASE
+
+  - spring-context  org.springframework:spring-context:jar:3.1.0.RELEASE
+
+  - spring-context-support  org.springframework:spring-context-support:jar:3.1.0.RELEASE
+
+  - spring-core  org.springframework:spring-core:jar:3.1.0.RELEASE
+
+  - spring-expression  org.springframework:spring-expression:jar:3.1.0.RELEASE
+
+  - spring-jdbc  org.springframework:spring-jdbc:jar:3.1.0.RELEASE
+
+  - spring-orm  org.springframework:spring-orm:jar:3.1.0.RELEASE
+
+  - spring-tx  org.springframework:spring-tx:jar:3.1.0.RELEASE
+
+  - spring-web  org.springframework:spring-web:jar:3.1.0.RELEASE
+
+  - spring-security-core  org.springframework.security:spring-security-core:jar:3.1.0.RELEASE
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - spring-security-crypto  org.springframework.security:spring-security-crypto:jar:3.1.0.RELEASE
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - spring-security-web  org.springframework.security:spring-security-web:jar:3.1.0.RELEASE
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'Apache Software Foundation' (http://www.apache.org)
+  - Apache Log4j (http://logging.apache.org/log4j/1.2/) log4j:log4j:bundle:1.2.16
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - JMS 1.1 (http://geronimo.apache.org/specs/geronimo-jms_1.1_spec) org.apache.geronimo.specs:geronimo-jms_1.1_spec:jar:1.1.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - JTA 1.1 (http://geronimo.apache.org/specs/geronimo-jta_1.1_spec) org.apache.geronimo.specs:geronimo-jta_1.1_spec:jar:1.1.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - OpenJPA Aggregate Jar (http://openjpa.apache.org/openjpa) org.apache.openjpa:openjpa:bundle:2.1.1
+    License: Apache Software License 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'FasterXML' (http://fasterxml.com)
+  - Jackson (http://jackson.codehaus.org) org.codehaus.jackson:jackson-core-asl:jar:1.8.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Data Mapper for Jackson (http://jackson.codehaus.org) org.codehaus.jackson:jackson-mapper-asl:jar:1.8.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'Google, Inc.' (http://www.google.com)
+  - Google Guice - Core Library (http://code.google.com/p/google-guice/guice/) com.google.inject:guice:jar:3.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Google Guice - Extensions - Persist (http://code.google.com/p/google-guice/extensions-parent/guice-persist/) com.google.inject.extensions:guice-persist:jar:3.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'QOS.ch' (http://www.qos.ch)
+  - JCL 1.1.1 implemented over SLF4J (http://www.slf4j.org) org.slf4j:jcl-over-slf4j:jar:1.6.1
+    License: MIT License  (http://www.opensource.org/licenses/mit-license.php)
+  - SLF4J API Module (http://www.slf4j.org) org.slf4j:slf4j-api:jar:1.6.1
+    License: MIT License  (http://www.opensource.org/licenses/mit-license.php)
+  - SLF4J LOG4J-12 Binding (http://www.slf4j.org) org.slf4j:slf4j-log4j12:jar:1.6.1
+    License: MIT License  (http://www.opensource.org/licenses/mit-license.php)
+
+From: 'The Apache Software Foundation' (http://www.apache.org)
+  - Apache Geronimo JSR-317 JPA 2.0 Spec API (http://geronimo.apache.org/maven/specs/geronimo-jpa_2.0_spec/1.1) org.apache.geronimo.specs:geronimo-jpa_2.0_spec:bundle:1.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'The Apache Software Foundation' (http://www.apache.org/)
+  - Commons Collections (http://commons.apache.org/collections/) commons-collections:commons-collections:jar:3.2.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Commons Lang (http://commons.apache.org/lang/) commons-lang:commons-lang:jar:2.6
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Commons Pool (http://commons.apache.org/pool/) commons-pool:commons-pool:jar:1.5.4
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Rave :: rave-commons (http://rave.apache.org/rave-project/rave-components/rave-commons/) org.apache.rave:rave-commons:jar:0.11
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Rave :: rave-core (http://rave.apache.org/rave-project/rave-components/rave-core/) org.apache.rave:rave-core:jar:0.11
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Rave :: rave-opensocial-core (http://rave.apache.org/rave-project/rave-providers/rave-opensocial-provider/rave-opensocial-core/) org.apache.rave:rave-opensocial-core:jar:0.11
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Shindig Web App (http://shindig.apache.org/shindig-server) org.apache.shindig:shindig-server:war:2.5.0-beta1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+
+

@@ -1,0 +1,237 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.surfnet.coin</groupId>
+  <artifactId>coin-rave-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Coin Rave Parent pom</name>
+  <description>Project for war overlays of Rave for SURFnet</description>
+  <url>http://incubator.apache.org/rave</url>
+
+  <properties>
+    <apache.rave.version>0.11</apache.rave.version>
+    <apache.rave.extension.sso.version>0.11-SNAPSHOT</apache.rave.extension.sso.version>
+
+    <mysql.version>5.1.18</mysql.version>
+    <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+    <javax.servlet.version>2.5</javax.servlet.version>
+    <jsp-api.version>2.1</jsp-api.version>
+    <el-api.version>1.0</el-api.version>
+    <org.slf4j.version>1.6.1</org.slf4j.version>
+    <log4j.version>1.2.16</log4j.version>
+
+    <junit.version>4.7</junit.version>
+    <easymock.version>3.0</easymock.version>
+
+    <com.h2database.version>1.3.154</com.h2database.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javaagent/>
+  </properties>
+
+  <scm>
+    <connection>scm:svn:https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk</connection>
+    <developerConnection>scm:svn:https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk/</developerConnection>
+    <url>https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk</url>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>apache.snapshots</id>
+      <url>http://repository.apache.org/snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>apache.staging</id>
+      <name>Apache Staging Maven Repo (needed for 0.5-incubating until the official release)</name>
+      <url>https://repository.apache.org/content/repositories/orgapacherave-133/</url>
+      <releases>
+        <enabled>true</enabled>
+        <checksumPolicy>fail</checksumPolicy>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <repository>
+      <id>coin-repo</id>
+      <name>coin-repo</name>
+      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+    </repository>
+    <snapshotRepository>
+      <id>coin-repo</id>
+      <name>coin-repo</name>
+      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-commons</artifactId>
+        <version>${apache.rave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-core</artifactId>
+        <version>${apache.rave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-web</artifactId>
+        <version>${apache.rave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-opensocial-provider</artifactId>
+        <version>${apache.rave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-w3c-provider</artifactId>
+        <version>${apache.rave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-portal-resources</artifactId>
+        <version>${apache.rave.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-portal-dependencies</artifactId>
+        <version>${apache.rave.version}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-shindig</artifactId>
+        <version>${apache.rave.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.rave</groupId>
+        <artifactId>rave-demo-gadgets</artifactId>
+        <version>${apache.rave.version}</version>
+        <type>war</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.rave.extensions</groupId>
+        <artifactId>rave-extension-sso</artifactId>
+        <version>${apache.rave.extension.sso.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>${com.h2database.version}</version>
+      </dependency>
+
+      <!-- Provided dependencies -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${javax.servlet.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>${jsp-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.el</groupId>
+        <artifactId>el-api</artifactId>
+        <version>${el-api.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.1</version>
+        <scope>provided</scope>
+      </dependency>
+
+
+      <!-- Test dependencies -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.easymock</groupId>
+        <artifactId>easymock</artifactId>
+        <version>${easymock.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${org.springframework.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>coin-rave-portal-design</module>
+    <module>coin-rave-portal-dist</module>
+    <module>coin-rave-shindig</module>
+    <module>coin-rave-dist</module>
+  </modules>
+
+  <profiles>
+    <profile>
+      <id>jrebel</id>
+      <activation>
+        <property>
+          <name>jrebel</name>
+        </property>
+      </activation>
+      <properties>
+        <javaagent>-javaagent:${env.REBEL_HOME}/jrebel.jar</javaagent>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>jrebel-maven-plugin</artifactId>
+            <version>1.0.7</version>
+            <executions>
+              <execution>
+                <id>generate-rebel-xml</id>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

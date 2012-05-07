@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+  <http use-expressions="true">
+    <intercept-url pattern="/newaccount.jsp*" access="permitAll"/>
+    <intercept-url pattern="/app/newaccount*" access="permitAll"/>
+    <intercept-url pattern="/landingpage*" access="permitAll" />
+    <intercept-url pattern="/css/**" access="permitAll"/>
+    <intercept-url pattern="/images/**" access="permitAll"/>
+    <intercept-url pattern="/script/**" access="permitAll"/>
+    <intercept-url pattern="/app/admin/**" access="hasRole('ROLE_ADMIN')"/>
+    <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+
+    <form-login login-page="/landingpage" authentication-failure-url="/landingpage?authfail=shib"/>
+    <logout logout-success-url="/../Shibboleth.sso/Logout?target=/portal"/>
+    <!-- To remove SSO header authentication, comment out the following line -->
+    <custom-filter ref="ssoHeaderFilter" position="PRE_AUTH_FILTER"/>
+  </http>
+
+  <!--
+    REMOTE_USER is the header we're expecting.
+    It's important that if we're using this header, the app is not accessed directly,
+    instead accessed only through e.g. the Apache Shibboleth module, otherwise this header could be faked.
+  -->
+  <beans:bean id="ssoHeaderFilter"
+              class="org.apache.rave.portal.security.filter.SSORequestHeaderAuthenticationFilter">
+    <beans:property name="principalRequestHeader" value="REMOTE_USER"/>
+    <beans:property name="authenticationManager" ref="authenticationManager"/>
+    <beans:property name="allowPreAuthenticatedPrincipals" value="true"/>
+    <beans:property name="exceptionIfHeaderMissing" value="false"/>
+    <beans:constructor-arg index="0" ref="userService"/>
+    <beans:constructor-arg index="1" ref="ssoLoginHandler"/>
+  </beans:bean>
+
+  <beans:bean id="ssoLoginHandler" class="org.apache.rave.portal.security.impl.DefaultSSOLoginHandler">
+    <beans:property name="autoCreateUser" value="true"/>
+    <beans:property name="ssoHeaderEmail" value="Shib-InetOrgPerson-mail"/>
+    <beans:property name="ssoHeaderDisplayName" value="displayName"/>
+    <beans:property name="defaultPageLayout" value="columns_2"/>
+    <beans:property name="defaultUserRole" value="ROLE_USER"/>
+    <beans:constructor-arg index="0" ref="defaultNewAccountService"/>
+    <beans:constructor-arg index="1" ref="userDetailsService"/>
+    <beans:constructor-arg index="2" ref="defaultAuthorityService"/>
+  </beans:bean>
+
+  <beans:bean id="preauthAuthProvider"
+              class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+    <beans:property name="preAuthenticatedUserDetailsService">
+      <beans:bean id="userDetailsServiceWrapper"
+                  class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+        <beans:property name="userDetailsService" ref="userDetailsService"/>
+      </beans:bean>
+    </beans:property>
+  </beans:bean>
+
+  <beans:bean id="userDetailsService" class="org.apache.rave.portal.service.impl.DefaultUserService"/>
+
+  <authentication-manager alias="authenticationManager">
+    <authentication-provider ref="preauthAuthProvider" />
+    <!-- If anonymous or regular login was enabled, their authentication providers are added here too. -->
+  </authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>coin-rave-parent</artifactId>
+    <groupId>org.surfnet.coin</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>coin-rave-portal-design</artifactId>
+  <name>Coin Rave Portal design war overlay</name>
+  <description>The war overlay to be able to modify the design.
+    This is not the war that will be deployed to the server.</description>
+
+  <packaging>war</packaging>
+
+  <properties>
+    <cargo.version>1.1.0</cargo.version>
+    <!-- if you want a remote debugging on a different a address
+override on command line with -Dcargo.debug.addres=xxxx -->
+    <cargo.debug.address>8000</cargo.debug.address>
+    <!-- if you want to start remote debugging session suspended
+override on command line with -Dcargo.debug.suspend=y -->
+    <cargo.debug.suspend>n</cargo.debug.suspend>
+
+    <!-- TODO staat ook al in rave's root pom -->
+    <javax.mail.version>1.4.4</javax.mail.version>
+    <javax.activation.version>1.1</javax.activation.version>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.rave</groupId>
+      <artifactId>rave-portal-dependencies</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.rave</groupId>
+      <artifactId>rave-portal-resources</artifactId>
+      <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>${javax.mail.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>${javax.activation.version}</version>
+    </dependency>
+
+    <!-- Logging -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${org.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${org.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${org.slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!-- cargo run -->
+    <!-- Default database -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.rave</groupId>
+      <artifactId>rave-shindig</artifactId>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.rave</groupId>
+      <artifactId>rave-demo-gadgets</artifactId>
+      <type>war</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.1.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>make-the-jar</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+
+          <execution>
+            <id>install-the-jar</id>
+            <phase>install</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+
+              <packaging>jar</packaging>
+              <artifactId>${project.artifactId}</artifactId>
+              <groupId>${project.groupId}</groupId>
+              <version>${project.version}</version>
+              <file>${project.build.directory}/${project.artifactId}-${project.version}.jar</file>
+
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <overlays>
+            <overlay>
+              <groupId>org.apache.rave</groupId>
+              <artifactId>rave-portal-resources</artifactId>
+            </overlay>
+          </overlays>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <version>${cargo.version}</version>
+        <configuration>
+          <wait>true</wait>
+          <configuration>
+            <properties>
+              <cargo.jvmargs>
+                <![CDATA[-Xdebug -Xrunjdwp:transport=dt_socket,address=${cargo.debug.address},server=y,suspend=${cargo.debug.suspend} -noverify ${javaagent}]]>
+              </cargo.jvmargs>
+              <cargo.tomcat.context.reloadable>true</cargo.tomcat.context.reloadable>
+            </properties>
+            <home>${project.build.directory}/tomcat6x</home>
+            <deployables>
+              <deployable>
+                <groupId>org.apache.rave</groupId>
+                <artifactId>rave-shindig</artifactId>
+                <type>war</type>
+                <properties>
+                  <context>/ROOT</context>
+                </properties>
+              </deployable>
+              <deployable>
+                <groupId>org.apache.rave</groupId>
+                <artifactId>rave-demo-gadgets</artifactId>
+                <type>war</type>
+                <!-- I tried giving this name gagdets and it did not work. -->
+                <properties>
+                  <context>/demogadgets</context>
+                </properties>
+              </deployable>
+              <deployable>
+                <groupId>org.surfnet.coin</groupId>
+                <artifactId>coin-rave-portal-design</artifactId>
+                <type>war</type>
+                <properties>
+                  <context>/portal</context>
+                </properties>
+              </deployable>
+            </deployables>
+          </configuration>
+          <container>
+            <containerId>tomcat6x</containerId>
+            <timeout>180000</timeout>
+            <zipUrlInstaller>
+              <downloadDir>${settings.localRepository}/org/codehaus/cargo/cargo-container-archives</downloadDir>k
+              <url>
+                http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/apache-tomcat-6.0.32.tar.gz
+              </url>
+            </zipUrlInstaller>
+            <systemProperties>
+              <!-- Documentation: http://incubator.apache.org/rave/documentation/host-configuration.html -->
+              <!--
+                  <portal.override.properties>/path/to/custom.portal.properties</portal.override.properties>
+                  <shindig.override.properties>/path/to/custom.shindig.properties</shindig.override.properties>
+                  <shindig.host>localhost</shindig.host>
+                  <shindig.port>8080</shindig.port>
+                  <shindig.contextroot />
+              -->
+            </systemProperties>
+
+            <dependencies>
+              <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <classpath>shared</classpath>
+              </dependency>
+              <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <classpath>shared</classpath>
+              </dependency>
+            </dependencies>
+
+          </container>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>

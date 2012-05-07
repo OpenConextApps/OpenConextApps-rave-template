@@ -1,0 +1,56 @@
+portal.opensocial_engine.protocol=https
+portal.opensocial_engine.root=rave-shindig.dev.surfconext.nl:443
+portal.opensocial_engine.gadget_path=/gadgets
+
+portal.opensocial_security.encryptionkey=classpath:security_token_encryption_key.txt
+portal.opensocial_security.container=default
+portal.opensocial_security.domain=default
+
+# the default page name to create for new users
+portal.page.default_name=Main
+
+#MySQL
+portal.dataSource.url=jdbc:mysql://db.dev.surfconext.nl:3306/rave-portal?allowMultiQueries=true
+portal.dataSource.driver=com.mysql.jdbc.Driver
+portal.dataSource.username=rave
+portal.dataSource.password=### PASSWORD ###
+
+portal.jpaDialect=org.springframework.orm.jpa.DefaultJpaDialect
+portal.jpaVendorAdapter.databasePlatform=org.apache.openjpa.jdbc.sql.MySQLDictionary
+portal.jpaVendorAdapter.database=MYSQL
+
+# General Rave portal database settings
+portal.jpaVendorAdapter.showSql=false
+portal.openjpa.Log=DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=WARN
+portal.openjpa.RuntimeUnenhancedClasses=unsupported
+portal.openjpa.jdbc.SynchronizeMappings=buildSchema(ForeignKeys=true)
+
+provider.wookie.wookieServerUrl=https://rave.dev.surfconext.nl/wookie
+provider.wookie.wookieApiKey=TEST# captcha settings
+portal.captcha.enabled=false
+portal.captcha.key.private=
+portal.captcha.key.public=
+portal.captcha.usenoscript=false
+portal.captcha.invalid.configuration=<label class="error">ReCaptcha service is not properly configured.</label>
+
+#mail settings
+portal.mail.sender=
+portal.mail.replyto=
+portal.mail.host=
+portal.mail.password=
+portal.mail.username=
+portal.mail.protocol=smtp
+portal.mail.port=25
+portal.mail.username.subject=Rave username reminder service
+portal.mail.username.template=username_reminder.ftl
+portal.mail.passwordservice.subject=Rave password reminder service
+portal.mail.passwordservice.template=password_reminder.ftl
+portal.mail.passwordservice.valid.minutes=30
+portal.mail.service.baseurl=https://rave.dev.surfconext.nl/portal/app/changepassword/
+
+# Account approval
+portal.user.account.needapproval=false
+portal.user.account.admin.email=
+portal.user.account.admin.subject=Rave User Approval
+portal.user.account.admin.template=admin_approval.ftl
+portal.mail.service.loginpage=https://rave.dev.surfconext.nl/portal/

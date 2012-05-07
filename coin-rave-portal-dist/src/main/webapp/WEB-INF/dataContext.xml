@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <!--
+        Bean that executes the given set of resources (SQL scripts) in order
+        To remove runtime initialization of initial data, remove this bean and change the entity manager factory to the default
+        Spring implementation
+    -->
+    <bean id="dataSourcePopulator" class="org.apache.rave.jdbc.util.DataSourcePopulator">
+        <property name="executeScriptQuery" value="SELECT * FROM page_layout"/>
+        <property name="scriptLocations">
+            <list>
+                <value>classpath:page_layouts.sql</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
