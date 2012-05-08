@@ -2,12 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>coin-rave-parent</artifactId>
     <groupId>org.surfnet.coin</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
   <artifactId>coin-rave-portal-design</artifactId>
   <name>Coin Rave Portal design war overlay</name>
@@ -32,6 +33,25 @@ override on command line with -Dcargo.debug.suspend=y -->
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>3.1.0.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>3.1.0.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-security-opensaml</artifactId>
+      <groupId>org.surfnet.coin</groupId>
+      <version>${project.parent.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.rave</groupId>
       <artifactId>rave-portal-dependencies</artifactId>
@@ -103,11 +123,23 @@ override on command line with -Dcargo.debug.suspend=y -->
       <type>war</type>
       <scope>provided</scope>
     </dependency>
+
   </dependencies>
 
   <build>
     <defaultGoal>install</defaultGoal>
 
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/src/main/webapp/WEB-INF</directory>
+      </testResource>
+      <testResource>
+        <directory>${project.basedir}/src/main/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
 
     <pluginManagement>
       <plugins>
@@ -144,6 +176,7 @@ override on command line with -Dcargo.debug.suspend=y -->
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
@@ -188,6 +221,7 @@ override on command line with -Dcargo.debug.suspend=y -->
         <configuration>
           <wait>true</wait>
           <configuration>
+
             <properties>
               <cargo.jvmargs>
                 <![CDATA[-Xdebug -Xrunjdwp:transport=dt_socket,address=${cargo.debug.address},server=y,suspend=${cargo.debug.suspend} -noverify ${javaagent}]]>
@@ -242,7 +276,6 @@ override on command line with -Dcargo.debug.suspend=y -->
                   <shindig.contextroot />
               -->
             </systemProperties>
-
             <dependencies>
               <dependency>
                 <groupId>javax.mail</groupId>

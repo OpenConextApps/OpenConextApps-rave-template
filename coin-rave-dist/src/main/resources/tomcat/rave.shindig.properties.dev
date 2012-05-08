@@ -30,7 +30,7 @@ shindig.spring.base-package=org.apache.rave
 rave-shindig.dataSource.url=jdbc:mysql://db.dev.surfconext.nl:3306/rave-portal
 rave-shindig.dataSource.driver=com.mysql.jdbc.Driver
 rave-shindig.dataSource.username=rave
-rave-shindig.dataSource.password=### PASSWORD ###
+rave-shindig.dataSource.password=Iwannabearaver
 
 rave-shindig.jpaDialect=org.springframework.orm.jpa.DefaultJpaDialect
 rave-shindig.jpaVendorAdapter.databasePlatform=org.apache.openjpa.jdbc.sql.MySQLDictionary

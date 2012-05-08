@@ -7,7 +7,7 @@
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -86,7 +86,7 @@
 // never conflict with a lockedDomainSuffix.
 "gadgets.jsUriTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/js/%js%",
 
-"gadgets.uri.js.host" : "http://www.example.com/",
+"gadgets.uri.js.host" : "https://www.example.com/",
 "gadgets.uri.js.path" : "/gadgets/js",
 
 // Callback URL.  Scheme relative URL for easy switch between https/http.
@@ -159,17 +159,17 @@
   "views" : {
     "profile" : {
       "isOnlyVisible" : false,
-      "urlTemplate" : "http://localhost/gadgets/profile?{var}",
+      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/profile?{var}",
       "aliases": ["DASHBOARD", "default"]
     },
     "canvas" : {
       "isOnlyVisible" : true,
-      "urlTemplate" : "http://localhost/gadgets/canvas?{var}",
+      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/canvas?{var}",
       "aliases" : ["FULL_PAGE"]
     },
     "default" : {
       "isOnlyVisible" : false,
-      "urlTemplate" : "http://localhost/gadgets/default?{var}",
+      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/default?{var}",
       "aliases" : ["home", "profile", "canvas"]
     }
   },

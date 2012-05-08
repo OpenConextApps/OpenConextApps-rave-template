@@ -28,11 +28,6 @@
       <type>war</type>
     </dependency>
 
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-
     <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -79,8 +74,7 @@
               <groupId>org.surfnet.coin</groupId>
               <artifactId>coin-rave-portal-design</artifactId>
               <excludes>
-                <exclude>WEB-INF/classes/org.apache.rave.portal.properties</exclude>
-                <exclude>WEB-INF/applicationContext-security.xml</exclude>
+                <exclude>WEB-INF/classes/portal.properties</exclude>
                 <exclude>WEB-INF/lib/h2-*.jar</exclude>
                 <exclude>login.jsp</exclude>
               </excludes>

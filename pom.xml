@@ -201,6 +201,7 @@
     <module>coin-rave-portal-dist</module>
     <module>coin-rave-shindig</module>
     <module>coin-rave-dist</module>
+    <module>spring-security-opensaml</module>
   </modules>
 
   <profiles>
