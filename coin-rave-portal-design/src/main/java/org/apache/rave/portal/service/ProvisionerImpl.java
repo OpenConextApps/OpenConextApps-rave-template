@@ -13,8 +13,16 @@ import nl.surfnet.spring.security.opensaml.Provisioner;
 
 public class ProvisionerImpl implements Provisioner {
 
+    public static final String DEFAULT_PAGE_LAYOUT_CODE = "columns_2";
+
     private UserService userService;
     private NewAccountService newAccountService;
+
+    private String attributeEmail;
+    private String attributeUsername;
+    private String attributeDisplay;
+    private String attributeGivenname;
+    private String attributeSurname;
 
     @Required
     public void setUserService(final UserService userService) {
@@ -26,18 +34,37 @@ public class ProvisionerImpl implements Provisioner {
         this.newAccountService = newAccountService;
     }
 
-    public UserDetails provisionUser(final org.opensaml.saml2.core.Assertion assertion) {
-        final String ATTRIBUTE_EMAIL = "urn:mace:dir:attribute-def:mail";
-        final String ATTRIBUTE_USERNAME = "urn:oid:1.3.6.1.4.1.1076.20.40.40.1";
-        final String ATTRIBUTE_DISPLAY = "urn:mace:dir:attribute-def:displayName";
-        final String ATTRIBUTE_GIVENNAME = "urn:mace:dir:attribute-def:givenName";
-        final String ATTRIBUTE_SURNAME = "urn:mace:dir:attribute-def:sn";
+    @Required
+    public void setAttributeEmail(final String attributeEmail) {
+        this.attributeEmail = attributeEmail;
+    }
 
-        String email = getValueFromAttributeStatements(assertion, ATTRIBUTE_EMAIL);
-        String username = getValueFromAttributeStatements(assertion, ATTRIBUTE_USERNAME);
-        String display = getValueFromAttributeStatements(assertion, ATTRIBUTE_DISPLAY);
-        String givenName = getValueFromAttributeStatements(assertion, ATTRIBUTE_GIVENNAME);
-        String surname = getValueFromAttributeStatements(assertion, ATTRIBUTE_SURNAME);
+    @Required
+    public void setAttributeUsername(final String attributeUsername) {
+        this.attributeUsername = attributeUsername;
+    }
+
+    @Required
+    public void setAttributeDisplay(final String attributeDisplay) {
+        this.attributeDisplay = attributeDisplay;
+    }
+
+    @Required
+    public void setAttributeGivenname(final String attributeGivenname) {
+        this.attributeGivenname = attributeGivenname;
+    }
+
+    @Required
+    public void setAttributeSurname(final String attributeSurname) {
+        this.attributeSurname = attributeSurname;
+    }
+
+    public UserDetails provisionUser(final org.opensaml.saml2.core.Assertion assertion) {
+        String email = getValueFromAttributeStatements(assertion, attributeEmail);
+        String username = getValueFromAttributeStatements(assertion, attributeUsername);
+        String display = getValueFromAttributeStatements(assertion, attributeDisplay);
+        String givenName = getValueFromAttributeStatements(assertion, attributeGivenname);
+        String surname = getValueFromAttributeStatements(assertion, attributeSurname);
 
         if (isNewUser(username)) {
             createNewUser(display, username, email, givenName, surname, "Just new!", "I didn't fill this in yet.");
@@ -61,7 +88,7 @@ public class ProvisionerImpl implements Provisioner {
         newUser.setDisplayName(displayName);
         newUser.setUsername(username);
         newUser.setEmail(email);
-        newUser.setDefaultPageLayoutCode("columns_2");
+        newUser.setDefaultPageLayoutCode(DEFAULT_PAGE_LAYOUT_CODE);
         newUser.setPassword(RandomStringUtils.random(16));
         newUser.setGivenName(givenName);
         newUser.setFamilyName(familyName);

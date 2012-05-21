@@ -47,9 +47,9 @@ override on command line with -Dcargo.debug.suspend=y -->
     </dependency>
 
     <dependency>
+      <groupId>spring-security-opensaml</groupId>
       <artifactId>spring-security-opensaml</artifactId>
-      <groupId>org.surfnet.coin</groupId>
-      <version>${project.parent.version}</version>
+      <version>0.1</version>
     </dependency>
 
     <dependency>
