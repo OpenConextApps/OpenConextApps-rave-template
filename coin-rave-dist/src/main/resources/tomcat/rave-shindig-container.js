@@ -84,18 +84,18 @@
 // jsUriTemplate will have %host% and %js% substituted.
 // No locked domain special cases, but jsUriTemplate must
 // never conflict with a lockedDomainSuffix.
-"gadgets.jsUriTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/js/%js%",
+"gadgets.jsUriTemplate" : "https://rave-shindig.example.com/gadgets/js/%js%",
 
 "gadgets.uri.js.host" : "https://www.example.com/",
 "gadgets.uri.js.path" : "/gadgets/js",
 
 // Callback URL.  Scheme relative URL for easy switch between https/http.
-"gadgets.uri.oauth.callbackTemplate" : "//rave-shindig.dev.surfconext.nl/gadgets/oauthcallback",
+"gadgets.uri.oauth.callbackTemplate" : "//rave-shindig.example.com/gadgets/oauthcallback",
 
 // Config param to load Opensocial data for social
 // preloads in data pipelining.  %host% will be
 // substituted with the current host.
-"gadgets.osDataUri" : "https://rave-shindig.dev.surfconext.nl/rpc",
+"gadgets.osDataUri" : "https://rave-shindig.example.com/rpc",
 
 // Use an insecure security token by default
 //"gadgets.securityTokenType" : "insecure",
@@ -118,10 +118,10 @@
 
 
 // Authority (host:port without scheme) for the default shindig test instance.
-"defaultShindigTestAuthority":"rave-shindig.dev.surfconext.nl",
+"defaultShindigTestAuthority":"rave-shindig.example.com",
 
 // Authority (host:port without scheme) for the proxy and concat servlets.
-"defaultShindigProxyConcatAuthority":"rave-shindig.dev.surfconext.nl",
+"defaultShindigProxyConcatAuthority":"rave-shindig.example.com",
 
 // Default Js Uri config: also must be overridden.
 "gadgets.uri.js.host": "//${Cur['defaultShindigTestAuthority']}",
@@ -152,24 +152,24 @@
   "core.io" : {
     // Note: /proxy is an open proxy. Be careful how you expose this!
     // Note: Here // is replaced with the current protocol http/https
-   //"proxyUrl" : "//rave-shindig.dev.surfconext.nl/gadgets/proxy?container=%container%%rewriteMime%&refresh=%refresh%&gadget=%gadget%/%rawurl%",
-    "proxyUrl" : "//rave-shindig.dev.surfconext.nl/gadgets/proxy?container=%container%&refresh=%refresh%&url=%url%%rewriteMime%",
-    "jsonProxyUrl" : "//rave-shindig.dev.surfconext.nl/gadgets/makeRequest"
+   //"proxyUrl" : "//rave-shindig.example.com/gadgets/proxy?container=%container%%rewriteMime%&refresh=%refresh%&gadget=%gadget%/%rawurl%",
+    "proxyUrl" : "//rave-shindig.example.com/gadgets/proxy?container=%container%&refresh=%refresh%&url=%url%%rewriteMime%",
+    "jsonProxyUrl" : "//rave-shindig.example.com/gadgets/makeRequest"
   },
   "views" : {
     "profile" : {
       "isOnlyVisible" : false,
-      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/profile?{var}",
+      "urlTemplate" : "https://rave-shindig.example.com/gadgets/profile?{var}",
       "aliases": ["DASHBOARD", "default"]
     },
     "canvas" : {
       "isOnlyVisible" : true,
-      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/canvas?{var}",
+      "urlTemplate" : "https://rave-shindig.example.com/gadgets/canvas?{var}",
       "aliases" : ["FULL_PAGE"]
     },
     "default" : {
       "isOnlyVisible" : false,
-      "urlTemplate" : "https://rave-shindig.dev.surfconext.nl/gadgets/default?{var}",
+      "urlTemplate" : "https://rave-shindig.example.com/gadgets/default?{var}",
       "aliases" : ["home", "profile", "canvas"]
     }
   },
@@ -270,9 +270,9 @@
   "opensocial" : {
     // Path to fetch opensocial data from
     // Must be on the same domain as the gadget rendering server
-    "path" : "https://rave-shindig.dev.surfconext.nl/rpc",
+    "path" : "https://rave-shindig.example.com/rpc",
     // Path to issue invalidate calls
-    "invalidatePath" : "https://rave-shindig.dev.surfconext.nl/rpc",
+    "invalidatePath" : "https://rave-shindig.example.com/rpc",
     "domain" : "shindig",
     "enableCaja" : false,
     "supportedFields" : {
@@ -300,7 +300,7 @@
   },
   "osapi" : {
     // The endpoints to query for available JSONRPC/REST services
-    "endPoints" : [ "//rave-shindig.dev.surfconext.nl/rpc" ]
+    "endPoints" : [ "//rave-shindig.example.com/rpc" ]
   },
   "osml": {
     // OSML library resource.  Can be set to null or the empty string to disable OSML

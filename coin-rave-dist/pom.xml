@@ -15,15 +15,49 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <cargo.version>1.2.1</cargo.version>
-    <cargo.debug.address>8000</cargo.debug.address>
-    <cargo.debug.suspend>n</cargo.debug.suspend>
   </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>replace-version</id>
+            <phase>test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <property name="coin-version" value="${project.version}" />
+                <ant target="build" inheritRefs="true" />
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>attached</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptor>src/main/assembly/dep.xml</descriptor>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
       <groupId>org.surfnet.coin</groupId>
-      <artifactId>coin-rave-portal-design</artifactId>
+      <artifactId>coin-rave-portal-dist</artifactId>
       <type>war</type>
       <version>${project.version}</version>
     </dependency>
@@ -33,244 +67,5 @@
       <type>war</type>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.rave</groupId>
-      <artifactId>rave-demo-gadgets</artifactId>
-      <type>war</type>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.4</version>
-    </dependency>
   </dependencies>
-
-  <build>
-    <defaultGoal>install</defaultGoal>
-
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/main/webapp/WEB-INF</directory>
-      </testResource>
-      <testResource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-    </testResources>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>2.1.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.3.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.3.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>make-the-jar</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <executions>
-
-          <execution>
-            <id>install-the-jar</id>
-            <phase>install</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-
-              <packaging>jar</packaging>
-              <artifactId>${project.artifactId}</artifactId>
-              <groupId>${project.groupId}</groupId>
-              <version>${project.version}</version>
-              <file>${project.build.directory}/${project.artifactId}-${project.version}.jar</file>
-
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <overlays>
-            <overlay>
-              <groupId>org.apache.rave</groupId>
-              <artifactId>rave-portal-resources</artifactId>
-            </overlay>
-          </overlays>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.cargo</groupId>
-        <artifactId>cargo-maven2-plugin</artifactId>
-        <version>${cargo.version}</version>
-        <configuration>
-          <wait>true</wait>
-          <configuration>
-
-            <properties>
-              <cargo.jvmargs>
-                <![CDATA[-Xdebug -Xrunjdwp:transport=dt_socket,address=${cargo.debug.address},server=y,suspend=${cargo.debug.suspend} -noverify ${javaagent}]]>
-              </cargo.jvmargs>
-              <cargo.tomcat.context.reloadable>true</cargo.tomcat.context.reloadable>
-            </properties>
-            <home>${project.build.directory}/tomcat6x</home>
-            <deployables>
-              <deployable>
-                <groupId>org.surfnet.coin</groupId>
-                <artifactId>coin-rave-shindig</artifactId>
-                <type>war</type>
-                <properties>
-                  <context>/ROOT</context>
-                </properties>
-              </deployable>
-              <deployable>
-                <groupId>org.apache.rave</groupId>
-                <artifactId>rave-demo-gadgets</artifactId>
-                <type>war</type>
-                <!-- I tried giving this name gagdets and it did not work. -->
-                <properties>
-                  <context>/demogadgets</context>
-                </properties>
-              </deployable>
-              <deployable>
-                <groupId>org.surfnet.coin</groupId>
-                <artifactId>coin-rave-portal-design</artifactId>
-                <type>war</type>
-                <properties>
-                  <context>/portal</context>
-                </properties>
-              </deployable>
-            </deployables>
-          </configuration>
-          <container>
-            <containerId>tomcat6x</containerId>
-            <timeout>180000</timeout>
-            <zipUrlInstaller>
-              <downloadDir>${settings.localRepository}/org/codehaus/cargo/cargo-container-archives</downloadDir>k
-              <url>
-                http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.32/bin/apache-tomcat-6.0.32.tar.gz
-              </url>
-            </zipUrlInstaller>
-            <systemProperties>
-              <!-- Documentation: http://incubator.apache.org/rave/documentation/host-configuration.html -->
-              <!--
-                  <portal.override.properties>/path/to/custom.portal.properties</portal.override.properties>
-                  <shindig.override.properties>/path/to/custom.shindig.properties</shindig.override.properties>
-                  <shindig.host>localhost</shindig.host>
-                  <shindig.port>8080</shindig.port>
-                  <shindig.contextroot />
-              -->
-            </systemProperties>
-            <dependencies>
-              <dependency>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-                <classpath>shared</classpath>
-              </dependency>
-              <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <classpath>shared</classpath>
-              </dependency>
-            </dependencies>
-
-          </container>
-        </configuration>
-      </plugin>
-
-    </plugins>
-
-  </build>
-
-  <profiles>
-    <profile>
-      <id>dist</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.cargo</groupId>
-            <artifactId>cargo-maven2-plugin</artifactId>
-            <version>${cargo.version}</version>
-            <executions>
-              <execution>
-                <id>dist-cargo-package</id>
-                <phase>install</phase>
-                <goals>
-                  <goal>configure</goal>
-                  <goal>package</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>2.2.1</version>
-            <configuration>
-              <!-- Do not attach the resulting artifact(s) to the project (e.g. do not deploy) -->
-              <attach>false</attach>
-              <!-- Override finalName -->
-              <finalName>surfnet-rave-${project.version}</finalName>
-              <!-- Workaround for http://jira.codehaus.org/browse/MASSEMBLY-449 -->
-              <archiverConfig>
-                <fileMode>0644</fileMode>
-                <directoryMode>0755</directoryMode>
-                <defaultDirectoryMode>0755</defaultDirectoryMode>
-              </archiverConfig>
-            </configuration>
-            <executions>
-              <execution>
-                <id>dist-assembly</id>
-                <phase>install</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                  <finalName>apache-rave-${project.version}</finalName>
-                  <descriptors>
-                    <descriptor>${project.basedir}/src/main/assembly/distbin.xml</descriptor>
-                  </descriptors>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

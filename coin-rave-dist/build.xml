@@ -20,28 +20,18 @@
   <!-- Ant for replacing the property version in the spring config -->
 
   <target name="build" description="Replace the version token with the pom-version">
-    <copy file="${basedir}/src/main/resources/context/rave-shindig.dev.surfconext.nl/ROOT.xml"
-          tofile="${basedir}/target/resources/context/rave-shindig.dev.surfconext.nl/ROOT.xml" overwrite="true">
+    <copy file="${basedir}/src/main/resources/context/rave-shindig.example.com/ROOT.xml"
+          tofile="${basedir}/target/resources/context/rave-shindig.example.com/ROOT.xml" overwrite="true">
       <filterset>
         <filter token="VERSION" value="${coin-version}"/>
       </filterset>
     </copy>
-    <copy file="${basedir}/src/main/resources/context/rave.dev.surfconext.nl/portal.xml"
-          tofile="${basedir}/target/resources/context/rave.dev.surfconext.nl/portal.xml" overwrite="true">
+    <copy file="${basedir}/src/main/resources/context/rave.example.com/portal.xml"
+          tofile="${basedir}/target/resources/context/rave.example.com/portal.xml" overwrite="true">
       <filterset>
         <filter token="VERSION" value="${coin-version}"/>
       </filterset>
     </copy>
   </target>
-
-  <!-- Usage:  ant -f coin-rave-dist/build.xml -Dmachine=t04.dev.coin.surf.net scp -->
-  <!-- Cannot directly call executable 'scp', because ant does not support the wildcard use -->
-<!--
-  <target name="scp" description="SecureCoPies the tar.gz to the configured machine">
-    <exec executable="sh" failonerror="true" failifexecutionfails="true">
-      <arg line="-cv 'scp ${basedir}/target/coin-rave-dist-*.tar.gz ${machine}:/home/bamboo/dist/'"/>
-    </exec>
-  </target>
--->
 
 </project>
