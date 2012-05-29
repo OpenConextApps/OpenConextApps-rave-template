@@ -10,7 +10,7 @@ Building this template requires git and maven 3.0.
 ```bash
 git clone git://github.com/OpenConextApps/OpenConextApps-rave-template.git
 cd OpenConextApps-rave-template
-mvn clean install
+mvn -P dist clean install
 ```
 
 ## Running locally

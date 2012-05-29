@@ -35,6 +35,14 @@ override on command line with -Dcargo.debug.suspend=y -->
   <dependencies>
 
     <dependency>
+      <groupId>org.surfnet.coin</groupId>
+      <artifactId>coin-rave-shindig</artifactId>
+      <type>war</type>
+      <scope>provided</scope>
+      <version>${project.parent.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>3.1.0.RELEASE</version>
@@ -231,8 +239,13 @@ override on command line with -Dcargo.debug.suspend=y -->
             <home>${project.build.directory}/tomcat6x</home>
             <deployables>
               <deployable>
-                <groupId>org.apache.rave</groupId>
-                <artifactId>rave-shindig</artifactId>
+
+                <!-- <groupId>org.apache.rave</groupId>
+                <artifactId>rave-shindig</artifactId> -->
+
+                <groupId>org.surfnet.coin</groupId>
+                <artifactId>coin-rave-shindig</artifactId>
+
                 <type>war</type>
                 <properties>
                   <context>/ROOT</context>
@@ -285,6 +298,11 @@ override on command line with -Dcargo.debug.suspend=y -->
               <dependency>
                 <groupId>javax.activation</groupId>
                 <artifactId>activation</artifactId>
+                <classpath>shared</classpath>
+              </dependency>
+              <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
                 <classpath>shared</classpath>
               </dependency>
             </dependencies>
