@@ -53,6 +53,10 @@ The files are called *coin-rave-portal-dist-1.0-SNAPSHOT.war* and *coin-rave-shi
 
 #### Step 2.2 Add more memory to Tomcat.
 
+The following step depends on whether you are using unix or windows.
+
+##### On Unix
+
 *Create a file* called bin/setenv.sh with the following contents:
 
 ```bash
@@ -63,6 +67,15 @@ And make this file executable:
 
 ```bash
 chmod +x bin/setenv.sh
+```
+
+##### On Windows
+
+*Create a file* called bin/setenv.bat with the following contents:
+
+```bash
+@echo off
+set JAVA_OPTS=%JAVA_OPTS% -Xmx512m -XX:MaxPermSize=256m
 ```
 
 #### Step 2.3 Place the properties files
