@@ -27,7 +27,15 @@ And visit http://localhost:8080/portal/
 
 ## Custom deploy on a server
 
-### Step 1 Setup Tomcat 6.0
+### Step 1 Build the Rave template
+
+```bash
+git clone git://github.com/OpenConextApps/OpenConextApps-rave-template.git
+cd OpenConextApps-rave-template
+mvn -P dist clean install
+```
+
+### Step 2 Setup Tomcat 6.0
 
 At the time of writing 6.0.35 was the latest tomcat 6.0 version.
 Please verify if there was not a newer release so you can use that one instead.
@@ -37,12 +45,13 @@ wget http://mirrors.supportex.net/apache/tomcat/tomcat-6/v6.0.35/bin/apache-tomc
 tar xvfz apache-tomcat-6.0.35.tar.gz
 cd apache-tomcat-6.0.35
 ```
-#### Copy the web application archives to tomcat.
+
+#### Step 2.1 Copy the web application archives to tomcat.
 
 You can find these in the *coin-rave-dist/target/coin-rave-dist-1.0-SNAPSHOT-bin.tar.gz*.
 The files are called *coin-rave-portal-dist-1.0-SNAPSHOT.war* and *coin-rave-shindig-1.0-SNAPSHOT.war*.
 
-#### Add more memory to Tomcat.
+#### Step 2.2 Add more memory to Tomcat.
 
 *Create a file* called bin/setenv.sh with the following contents:
 
@@ -56,7 +65,7 @@ And make this file executable:
 chmod +x bin/setenv.sh
 ```
 
-#### Place the properties files
+#### Step 2.3 Place the properties files
 
 Create a *directory* for the properties files.
 
@@ -74,7 +83,7 @@ Next, copy the files rave-shindig-container.js, rave.shindig.properties, rave-op
 You can find these files in coin-rave-dist/src/main/dist/conf/classpath_properties.
 Edit all files so they match your server configuration, find / replace every rave.example.com and rave-shindig.example.com and replace them with your own hostname.
 
-#### Add the shared libraries
+#### Step 2.4 Add the shared libraries
 
 *Edit* conf/catalina.properties so that the *shared.loader* loads the *shared/lib* directory.
 
@@ -90,7 +99,7 @@ Next, copy the following three libraries to shared/lib:
 
 You can find these files on the internet. Because of GPL we can not package them for you.
 
-#### Configure a MySQL Database
+#### Step 2.5 Configure a MySQL Database
 
 Create a database (for example "rave-portal") in MySQL and give a user access.
 Next, set the database name, user name and password in *portal.properties* and *rave.shindig.properties*.
@@ -113,7 +122,7 @@ portal.dataSource.username=rave
 portal.dataSource.password=SecretPassword123
 ```
 
-#### Configure the hosts
+#### Step 2.6 Configure the hosts
 
 Add the following host configuration to conf/server.xml:
 
@@ -139,7 +148,7 @@ Please change the docBase parameter to the correct location.
 <Context path="" docBase="/path/to/coin-rave-shindig-1.0-SNAPSHOT.war" debug="0"></Context>
 ```
 
-#### Start the server
+#### Step 2.7 Start the server
 
 ```bash
 bin/startup.sh
