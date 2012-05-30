@@ -53,7 +53,7 @@ import org.scribe.oauth.OAuthService;
 import nl.surfnet.coin.api.client.domain.Group20;
 import nl.surfnet.coin.api.client.domain.Group20Entry;
 
-public class CoinGroupService implements GroupService, InitializingBean {
+public class CoinGroupService implements GroupService {
 
     private Logger logger = LoggerFactory.getLogger(CoinGroupService.class);
 
@@ -154,11 +154,5 @@ public class CoinGroupService implements GroupService, InitializingBean {
     @Required
     public void setApiLocation(final String apiLocation) {
         this.apiLocation = apiLocation;
-    }
-
-    public void afterPropertiesSet() throws Exception {
-        System.out.println(
-                "******************* " +
-                oauthKey + " " + oauthSecret + " " + apiLocation);
     }
 }
