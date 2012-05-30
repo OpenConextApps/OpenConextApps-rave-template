@@ -9,11 +9,10 @@
 
   <name>Coin Rave Parent pom</name>
   <description>Project for war overlays of Rave for SURFnet</description>
-  <url>http://incubator.apache.org/rave</url>
+  <url>https://github.com/OpenConextApps/OpenConextApps-rave-template</url>
 
   <properties>
     <apache.rave.version>0.11</apache.rave.version>
-    <apache.rave.extension.sso.version>0.11-SNAPSHOT</apache.rave.extension.sso.version>
 
     <mysql.version>5.1.18</mysql.version>
     <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
@@ -32,9 +31,9 @@
   </properties>
 
   <scm>
-    <connection>scm:svn:https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk</connection>
-    <developerConnection>scm:svn:https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk/</developerConnection>
-    <url>https://svn.surfnet.nl/svn/coin-private/coin-rave-overlay/trunk</url>
+    <connection>git@github.com:OpenConextApps/OpenConextApps-rave-template.git</connection>
+    <developerConnection>git@github.com:OpenConextApps/OpenConextApps-rave-template.git</developerConnection>
+    <url>https://github.com/OpenConextApps/OpenConextApps-rave-template</url>
   </scm>
 
   <repositories>
@@ -138,12 +137,6 @@
         <artifactId>rave-demo-gadgets</artifactId>
         <version>${apache.rave.version}</version>
         <type>war</type>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.rave.extensions</groupId>
-        <artifactId>rave-extension-sso</artifactId>
-        <version>${apache.rave.extension.sso.version}</version>
       </dependency>
 
       <dependency>

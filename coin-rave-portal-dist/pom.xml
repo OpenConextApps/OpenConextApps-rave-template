@@ -17,11 +17,6 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.apache.rave.extensions</groupId>
-      <artifactId>rave-extension-sso</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>org.surfnet.coin</groupId>
       <artifactId>coin-rave-portal-design</artifactId>
       <version>${project.version}</version>
