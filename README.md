@@ -96,7 +96,7 @@ chmod +x bin/setenv.sh
 set JAVA_OPTS=%JAVA_OPTS% -Xmx512m -XX:MaxPermSize=256m
 ```
 
-#### Step 2.3 Place the properties files
+#### Step 2.3 Configure Rave
 
 Create a *directory* for the properties files.
 
@@ -110,13 +110,13 @@ mkdir -p /opt/tomcat/conf/classpath_properties
 common.loader=${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/conf/classpath_properties
 ```
 
-Next, copy the files rave-shindig-container.js, rave.shindig.properties, rave-opensaml.properties and portal.properties to conf/classpath_properties.
+Next, copy the files rave-shindig-container.js, rave.shindig.properties, rave-opensaml.properties and portal.properties to /opt/tomcat/conf/classpath_properties.
 You can find these files in coin-rave-dist/src/main/dist/conf/classpath_properties.
 Edit all files so they match your server configuration, find / replace every rave.example.com and rave-shindig.example.com and replace them with your own hostname.
 
 #### Step 2.4 Add the shared libraries
 
-*Edit* /opt/tomcat/conf/catalina.properties so that the *shared.loader* loads the *shared/lib* directory.
+*Edit* /opt/tomcat/conf/catalina.properties so that the *shared.loader* loads the libraries from the */opt/tomcat/shared/lib* directory.
 
 ```bash
 shared.loader=${catalina.home}/shared/lib,${catalina.home}/shared/lib/*.jar
@@ -146,7 +146,7 @@ For example:
 
 **/opt/tomcat/conf/classpath_properties/rave.shindig.properties**:
 ```ini
-rave-shindig.dataSource.url=jdbc:mysql://localhost:3306/rave-portal
+rave-shindig.dataSource.url=jdbc:mysql://localhost:3306/ravedb
 rave-shindig.dataSource.driver=com.mysql.jdbc.Driver
 rave-shindig.dataSource.username=rave
 rave-shindig.dataSource.password=SecretPassword123
@@ -154,7 +154,7 @@ rave-shindig.dataSource.password=SecretPassword123
 
 **/opt/tomcat/conf/classpath_properties/portal.properties**:
 ```ini
-portal.dataSource.url=jdbc:mysql://localhost:3306/rave-portal?allowMultiQueries=true
+portal.dataSource.url=jdbc:mysql://localhost:3306/ravedb?allowMultiQueries=true
 portal.dataSource.driver=com.mysql.jdbc.Driver
 portal.dataSource.username=rave
 portal.dataSource.password=SecretPassword123
@@ -198,7 +198,7 @@ mkdir -p /opt/tomcat/webapps/rave.example.com
 mkdir -p /opt/tomcat/webapps/rave-shindig.example.com
 ```
 
-#### Step 2.7 Make tomcat the owner of it all
+#### Step 2.7 Make user "tomcat" the owner
 
 As *root* execute:
 
