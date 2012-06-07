@@ -1,11 +1,17 @@
 # Surfnet's Apache Rave Template
 
-This is a minimal WAR overlay project to run Apache Rave at SURFnet.
+This is a minimal [WAR overlay](http://maven.apache.org/plugins/maven-war-plugin/overlays.html) project to run
+[Apache Rave](http://rave.apache.org/) at SURFnet.
 New features should preferably be generalized and contributed to Apache Rave.
+
+Most of the instructions were written for a Unix (Linux, MacOS) operating system. Their equivalents should work on
+Microsoft Windows systems as well. For some steps specific instructions are given for Windows users.
 
 ## Building
 
-Building this template requires git and maven 3.0.
+Building this template requires a [git](http://git-scm.com/) client,
+[JDK version 6](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or higher and that latest
+[Apache Maven 3.0](http://maven.apache.org/download.html).
 
 ```bash
 git clone git://github.com/OpenConextApps/OpenConextApps-rave-template.git
@@ -37,17 +43,19 @@ mvn -P dist clean install
 
 ### Step 2 Setup Tomcat 6.0
 
-We recommend that you get tomcat from your package manager.
+We recommend that you get Tomcat from your package manager.
 If this is not possible, install it yourself.
 In this manual we assume that tomcat is installed in */opt/tomcat*.
 
-At the time of writing 6.0.35 was the latest tomcat 6.0 version.
+At the time of writing 6.0.35 was the latest Tomcat 6.0 version.
 Please verify if there was not a newer release so you can use that one instead.
+
+#### On Unix
 
 As root:
 
 ```bash
-wget http://mirrors.supportex.net/apache/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.tar.gz
+wget http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35-deployer.tar.gz
 tar xvfz apache-tomcat-6.0.35.tar.gz
 mkdir /opt
 cp -r apache-tomcat-6.0.35 /opt/tomcat
@@ -58,9 +66,14 @@ chown -R tomcat:tomcat /opt/tomcat
 
 And add the tomcat to your services.
 
+#### On Windows
+
+Download the [Tomcat installer](http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.exe) and
+install it as a service.
+
 #### Step 2.1 Copy the web application archives to tomcat.
 
-You can find these in the *coin-rave-dist/target/coin-rave-dist-1.0-SNAPSHOT-bin.tar.gz*.
+You can find these in *coin-rave-dist/target/coin-rave-dist-1.0-SNAPSHOT-bin.tar.gz*.
 The files are called *coin-rave-portal-dist-1.0-SNAPSHOT.war* and *coin-rave-shindig-1.0-SNAPSHOT.war*.
 
 ```bash
@@ -112,7 +125,7 @@ common.loader=${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/c
 
 Next, copy the files rave-shindig-container.js, rave.shindig.properties, rave-opensaml.properties and portal.properties to /opt/tomcat/conf/classpath_properties.
 You can find these files in coin-rave-dist/src/main/dist/conf/classpath_properties.
-Edit all files so they match your server configuration, find / replace every rave.example.com and rave-shindig.example.com and replace them with your own hostname.
+Edit all files so they match your server configuration, find every rave.example.com and rave-shindig.example.com and replace them with your own hostname.
 
 #### Step 2.4 Add the shared libraries
 
@@ -128,7 +141,8 @@ Next, copy the following three libraries to shared/lib:
 * mail-1.4.4.jar
 * mysql-connector-java-5.1.20-bin.jar
 
-You can find these files on the internet. Because of GPL we can not package them for you.
+The MySQL jar is available under GPL, which is incompatible with our Apache License. Therefore you need to install it
+by hand. You can find these files on the locations mentioned below.
 
 ```bash
 cd /opt/tomcat/shared/lib
@@ -160,6 +174,9 @@ portal.dataSource.username=rave
 portal.dataSource.password=SecretPassword123
 ```
 
+The allowMultiQueries=true is only needed to populate the database for the first time. When the project is fully setup
+and running, the value of this parameter can be set to false.
+
 #### Step 2.6 Configure the hosts
 
 Add the following host configuration to /opt/tomcat/conf/server.xml:
@@ -180,15 +197,14 @@ Create a file */opt/tomcat/conf/Catalina/rave.example.com/portal.xml*.
 Please change the docBase parameter to the correct location.
 
 ```xml
-<Context path="/portal" docBase="/opt/tomcat/wars/coin-rave-portal-dist-1.0-SNAPSHOT.war" debug="0">
-</Context>
+<Context path="/portal" docBase="/opt/tomcat/wars/coin-rave-portal-dist-1.0-SNAPSHOT.war"/>
 ```
 
 Create a file */opt/tomcat/conf/Catalina/rave-shindig.example.com/ROOT.xml*.
 Please change the docBase parameter to the correct location.
 
 ```xml
-<Context path="" docBase="/opt/tomcat/wars/coin-rave-shindig-1.0-SNAPSHOT.war" debug="0"></Context>
+<Context path="" docBase="/opt/tomcat/wars/coin-rave-shindig-1.0-SNAPSHOT.war"/>
 ```
 
 Lastly, create the webapps directories.
@@ -208,12 +224,15 @@ chown tomcat:tomcat /opt/tomcat
 
 #### Step 2.8 Start the server
 
+#### On Unix systems
+
 As user *tomcat* execute:
 
 ```bash
-bin/startup.sh
+service tomcat start
 ```
 
+#### On Windows systems
 
-
-
+Open 'services' and start the service "Apache Tomcat 6.0 Tomcat6" (this is the default 
+name and can differ on the values you entered during installation)
