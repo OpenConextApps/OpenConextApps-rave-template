@@ -27,6 +27,12 @@
 
     <com.h2database.version>1.3.154</com.h2database.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <maven.plugin.compiler.version>2.3.2</maven.plugin.compiler.version>
+    <maven.wagon.webdav.version>1.0-beta-2</maven.wagon.webdav.version>
+
+    <java.version>1.6</java.version>
+
     <javaagent/>
   </properties>
 
@@ -237,4 +243,33 @@
       </build>
     </profile>
   </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.plugin.compiler.version}</version>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav</artifactId>
+        <version>${maven.wagon.webdav.version}</version>
+      </extension>
+    </extensions>
+  </build>
 </project>
