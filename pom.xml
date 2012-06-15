@@ -14,7 +14,7 @@
   <properties>
     <apache.rave.version>0.11</apache.rave.version>
 
-    <mysql.version>5.1.18</mysql.version>
+    <mysql.version>5.1.20</mysql.version>
     <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
     <javax.servlet.version>2.5</javax.servlet.version>
     <jsp-api.version>2.1</jsp-api.version>
@@ -49,41 +49,40 @@
       </snapshots>
     </repository>
     <repository>
-      <id>apache.staging</id>
-      <name>Apache Staging Maven Repo (needed for 0.5-incubating until the official release)</name>
-      <url>https://repository.apache.org/content/repositories/orgapacherave-133/</url>
-      <releases>
-        <enabled>true</enabled>
-        <checksumPolicy>fail</checksumPolicy>
-        <updatePolicy>never</updatePolicy>
-      </releases>
       <snapshots>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>openconext-snapshots</id>
+      <name>OpenConext public snapshot repository</name>
+      <url>https://build.surfconext.nl/repository/public/snapshots</url>
     </repository>
     <repository>
       <snapshots>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
       </releases>
-      <id>coin-repo</id>
-      <name>COIN Repository</name>
-      <url>http://bamboo-dev.coin.surfnetlabs.nl</url>
+      <id>openconext-releases</id>
+      <name>OpenConext public releases repository</name>
+      <url>https://build.surfconext.nl/repository/public/releases</url>
     </repository>
   </repositories>
 
   <distributionManagement>
     <repository>
-      <id>coin-repo</id>
-      <name>coin-repo</name>
-      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+      <id>openconext-releases</id>
+      <name>OpenConext public releases repository</name>
+      <url>dav:https://build.surfconext.nl/repository/public/releases</url>
     </repository>
     <snapshotRepository>
-      <id>coin-repo</id>
-      <name>coin-repo</name>
-      <url>dav:http://bamboo-dev.coin.surfnetlabs.nl</url>
+      <id>openconext-snapshots</id>
+      <name>OpenConext public snapshot repository</name>
+      <url>dav:https://build.surfconext.nl/repository/public/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
