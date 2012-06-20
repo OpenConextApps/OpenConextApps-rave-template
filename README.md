@@ -242,3 +242,7 @@ service tomcat start
 
 Open 'services' and start the service "Apache Tomcat 6.0 Tomcat6" (this is the default 
 name and can differ on the values you entered during installation)
+
+#### Step 3
+
+Configure your webserver to forward to the tomcat application server.
