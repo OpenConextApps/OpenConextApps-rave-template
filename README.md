@@ -123,8 +123,17 @@ mkdir -p /opt/tomcat/conf/classpath_properties
 common.loader=${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/conf/classpath_properties
 ```
 
-Next, copy the files rave-shindig-container.js, rave.shindig.properties, rave-opensaml.properties and portal.properties to /opt/tomcat/conf/classpath_properties.
-You can find these files in coin-rave-dist/src/main/dist/conf/classpath_properties.
+Next, copy the files:
+
+  * rave-shindig-container.js
+  * rave.shindig.properties
+  * rave-opensaml.properties
+  * portal.properties 
+
+to /opt/tomcat/conf/classpath_properties.
+
+You can find these files in OpenConextApps-rave-template/coin-rave-dist/src/main/resources/tomcat.
+
 Edit all files so they match your server configuration, find every rave.example.com and rave-shindig.example.com and replace them with your own hostname.
 
 #### Step 2.4 Add the shared libraries
@@ -245,4 +254,4 @@ name and can differ on the values you entered during installation)
 
 #### Step 3
 
-Configure your webserver to forward to the tomcat application server.
+Configure your webserver to forward to the tomcat application server. This is optional as you can connect directly to tomcat.
