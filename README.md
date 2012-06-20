@@ -55,7 +55,7 @@ Please verify if there was not a newer release so you can use that one instead.
 As root:
 
 ```bash
-wget http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35-deployer.tar.gz
+wget http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.35/bin/apache-tomcat-6.0.35.tar.gz
 tar xvfz apache-tomcat-6.0.35.tar.gz
 mkdir /opt
 cp -r apache-tomcat-6.0.35 /opt/tomcat
@@ -117,7 +117,7 @@ Create a *directory* for the properties files.
 mkdir -p /opt/tomcat/conf/classpath_properties
 ```
 
-*Edit* /opt/tomcat/conf/catalina.propeties so that the common.loader also includes the /opt/tomcat/conf/classpath_properties directory.
+*Edit* /opt/tomcat/conf/catalina.properties so that the common.loader also includes the /opt/tomcat/conf/classpath_properties directory.
 
 ```bash
 common.loader=${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.home}/conf/classpath_properties
@@ -135,7 +135,13 @@ Edit all files so they match your server configuration, find every rave.example.
 shared.loader=${catalina.home}/shared/lib,${catalina.home}/shared/lib/*.jar
 ```
 
-Next, copy the following three libraries to shared/lib:
+Create the shared/lib directory:
+
+```bash
+mkdir -p /opt/tomcat/shared/lib
+```
+
+Next, copy the following three libraries to */opt/tomcat/shared/lib*:
 
 * activation-1.1.jar
 * mail-1.4.4.jar
@@ -183,7 +189,7 @@ Add the following host configuration to /opt/tomcat/conf/server.xml:
 
 ```xml
 <Host name="rave.example.com" appBase="webapps/rave.example.com"/>
-<Host name="rave-shindig.example.com" appBase="webapps/example.com"/>
+<Host name="rave-shindig.example.com" appBase="webapps/rave-shindig.example.com"/>
 ```
 
 Create the directories */opt/tomcat/conf/Catalina/rave.example.com* and */opt/tomcat/conf/Catalina/rave-shindig.example.com*.
@@ -219,7 +225,7 @@ mkdir -p /opt/tomcat/webapps/rave-shindig.example.com
 As *root* execute:
 
 ```bash
-chown tomcat:tomcat /opt/tomcat
+chown -R tomcat:tomcat /opt/tomcat
 ```
 
 #### Step 2.8 Start the server
