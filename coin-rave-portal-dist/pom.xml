@@ -70,6 +70,7 @@
               <artifactId>coin-rave-portal-design</artifactId>
               <excludes>
                 <exclude>WEB-INF/classes/portal.properties</exclude>
+                <exclude>WEB-INF/classes/rave-opensaml.properties</exclude>
                 <exclude>WEB-INF/lib/h2-*.jar</exclude>
                 <exclude>login.jsp</exclude>
               </excludes>
