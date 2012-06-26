@@ -1,37 +1,10 @@
-set @page_layout_seq = 'page_layout';
-
-set @one_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@one_col_id, 'columns_1', 1);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @two_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@two_col_id, 'columns_2', 2);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @twown_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@twown_col_id, 'columns_2wn', 2);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @three_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@three_col_id, 'columns_3', 3);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @threewn_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@threewn_col_id, 'columns_3nwn', 3);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @four_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@four_col_id, 'columns_4', 4);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
-
-set @fourwn_col_id = (SELECT seq_count FROM RAVE_PORTAL_SEQUENCES WHERE seq_name = @page_layout_seq);
-insert into page_layout (entity_id, code,  number_of_regions)
-values (@fourwn_col_id, 'columns_3nwn_1_bottom', 4);
-UPDATE RAVE_PORTAL_SEQUENCES SET seq_count = (seq_count + 1) WHERE seq_name = @page_layout_seq;
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (1,'columns_1',1,0,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (2,'columns_2',2,1,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (3,'columns_2wn',2,2,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (4,'columns_3',3,3,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (5,'columns_3nwn',3,4,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (6,'columns_3_newuser',3,5,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (7,'columns_4',4,6,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (8,'columns_3nwn_1_bottom',4,7,'1');
+INSERT INTO `page_layout` (`entity_id`,`code`,`number_of_regions`,`render_sequence`,`user_selectable`) VALUES (9,'person_profile',1,8,'0');
 
