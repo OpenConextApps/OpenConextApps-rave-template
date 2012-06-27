@@ -11,7 +11,7 @@
         <property name="executeScriptQuery" value="SELECT * FROM page_layout"/>
         <property name="scriptLocations">
             <list>
-                <value>classpath:page_layouts.sql</value>
+                <value>classpath:initial_data.sql</value>
             </list>
         </property>
     </bean>
